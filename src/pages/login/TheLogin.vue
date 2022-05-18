@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTimeout } from '@vueuse/core'
 import useLoginStore from '@/store/useLoginStore'
 
 const router = useRouter()

@@ -34,6 +34,7 @@ const useLoginStore = defineStore({
 
     async doLogout() {
       gTools.fetchWrapper(doLogout)
+      this.allowRoutes = []
       this.sessionId = ''
     },
 
