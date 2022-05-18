@@ -10,6 +10,7 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const gTools: typeof import('@/utils/g-tools')['default']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
   const isReadonly: typeof import('vue')['isReadonly']
@@ -48,6 +49,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const validRules: typeof import('@/utils/g-validate')['default']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
 }

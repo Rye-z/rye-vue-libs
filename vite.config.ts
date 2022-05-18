@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   define: {
     'process.env': {},
   },
@@ -12,7 +13,6 @@ export default defineConfig({
     /* 设置路径别名 */
     alias: {
       '@': resolve(__dirname, 'src'),
-      '/images': 'src/assets/images',
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
   },
@@ -31,7 +31,14 @@ export default defineConfig({
         'vue',
         'vue-router',
         // custom
-        {},
+        {
+          '@/utils/g-tools': [
+            ['default', 'gTools'],
+          ],
+          '@/utils/g-validate': [
+            ['default', 'validRules'],
+          ],
+        },
       ],
 
       // Generate corresponding .eslintrc-auto-import.json file.
@@ -54,4 +61,17 @@ export default defineConfig({
       dts: './auto-imports.d.ts',
     }),
   ],
+  server: {
+    host: '0.0.0.0',
+    port: 8085,
+    open: false, // 自动打开
+    base: './ ', // 生产环境路径
+    proxy: {
+      '^/api': {
+        target: 'http://192.168.150.237:8081/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 })

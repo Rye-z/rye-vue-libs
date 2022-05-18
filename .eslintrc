@@ -1,5 +1,25 @@
 {
   "extends": [
     "@antfu"
-  ]
+  ],
+  "rules": {
+    "prefer-promise-reject-errors": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          [
+            "@",
+            "./src"
+          ]
+        ],
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".vue"
+        ]
+      }
+    }
+  }
 }
