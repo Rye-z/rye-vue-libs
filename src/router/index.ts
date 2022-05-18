@@ -73,7 +73,6 @@ const hasPermission = (store, routeName) => {
 
 router.beforeEach(async (to, from, next) => {
   const loginStore = useLoginStore()
-  await loginStore.fetchRoutes()
 
   if (to.path === '/login')
     next()
@@ -84,7 +83,8 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.state === 'disable' && !hasPermission(loginStore, to.name))
     next('/401')
 
-  next()
+  else
+    next()
 })
 
 export default router

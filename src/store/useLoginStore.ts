@@ -24,7 +24,7 @@ const useLoginStore = defineStore({
   id: 'LOGIN_ADMIN',
   state: () => ({
     sessionId: createStoreItem('sessionId', ''),
-    allowRoutes: [],
+    allowRoutes: createStoreItem('allowRoutes', ''),
   }),
   actions: {
     async doLogin() {
