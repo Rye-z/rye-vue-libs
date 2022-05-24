@@ -1,4 +1,5 @@
 // router/index.js
+
 import type { RouteRecordRaw } from 'vue-router'
 import {
   createRouter,
@@ -6,12 +7,53 @@ import {
 } from 'vue-router'
 import useLoginStore from '@/store/useLoginStore.js'
 
+enum RouteTypes {
+  Function,
+  Demo,
+}
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/home',
     alias: '/',
     name: 'HOME',
-    component: () => import('@/pages/system-admin/SystemAdmin.vue'),
+    component: () => import('@/pages/TheHome.vue'),
+  },
+  {
+    path: '/routes',
+    meta: {
+      type: RouteTypes.Function,
+      des: '全部路由',
+    },
+    name: 'ROUTES_ADMIN',
+    component: () => import('@/pages/demo-system-admin/routes-admin/RoutesAdmin.vue'),
+  },
+  {
+    path: '/demo/anchor',
+    name: 'DEMO_ANCHOR',
+    meta: {
+      type: RouteTypes.Demo,
+      des: '锚点跳转/懒加载',
+    },
+    component: () => import('@/pages/demo-anchor/DemoAnchor.vue'),
+    children: [
+      {
+        path: 'element',
+        name: 'DEMO_ANCHOR_ELEMENT',
+        meta: {
+          type: RouteTypes.Demo,
+        },
+        component: () => import('@/pages/demo-anchor/components/ScrollInElement.vue'),
+      },
+      {
+        path: 'window',
+        name: 'DEMO_ANCHOR_WINDOW',
+        meta: {
+          type: RouteTypes.Demo,
+        },
+        component: () => import('@/pages/demo-anchor/components/ScrollInWindow.vue'),
+      },
+    ],
   },
   {
     path: '/login',
@@ -24,8 +66,10 @@ const routes: RouteRecordRaw[] = [
     meta: {
       state: 'disable',
       title: '系统管理',
+      des: '动态权限',
+      type: RouteTypes.Demo,
     },
-    component: () => import('@/pages/system-admin/SystemAdmin.vue'),
+    component: () => import('@/pages/demo-system-admin/SystemAdmin.vue'),
     children: [
       {
         path: 'user',
@@ -33,7 +77,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           state: 'disable',
         },
-        component: () => import('@/pages/system-admin/user-admin/UserAdmin.vue'),
+        component: () => import('@/pages/demo-system-admin/user-admin/UserAdmin.vue'),
       },
       {
         path: 'menu',
@@ -41,7 +85,7 @@ const routes: RouteRecordRaw[] = [
           state: 'disable',
         },
         name: 'MENU_ADMIN',
-        component: () => import('@/pages/system-admin/menu-admin/MenuAdmin.vue'),
+        component: () => import('@/pages/demo-system-admin/menu-admin/MenuAdmin.vue'),
       },
     ],
   },
@@ -80,9 +124,12 @@ router.beforeEach(async (to, from, next) => {
   if (!isLogin(loginStore))
     next('/login')
 
-  if (to.meta.state === 'disable' && !hasPermission(loginStore, to.name))
+  if (
+    to.meta.state === 'disable'
+    && to.path.startsWith('/admin')
+    && !hasPermission(loginStore, to.name)
+  )
     next('/401')
-
   else
     next()
 })
