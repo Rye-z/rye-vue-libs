@@ -7,9 +7,10 @@ import {
 } from 'vue-router'
 import useLoginStore from '@/store/useLoginStore.js'
 
-enum RouteTypes {
-  Function,
-  Demo,
+export enum RouteTypes {
+  Function = 'Function',
+  Demo = 'Demo',
+  Problems = 'Problems',
 }
 
 const routes: RouteRecordRaw[] = [
@@ -19,6 +20,7 @@ const routes: RouteRecordRaw[] = [
     name: 'HOME',
     component: () => import('@/pages/TheHome.vue'),
   },
+  // Functions
   {
     path: '/routes',
     meta: {
@@ -28,12 +30,23 @@ const routes: RouteRecordRaw[] = [
     name: 'ROUTES_ADMIN',
     component: () => import('@/pages/demo-system-admin/routes-admin/RoutesAdmin.vue'),
   },
+  // Problems
+  {
+    path: '/problems/scroll-squeeze-page',
+    name: 'PROBLEM_SCROLL_SQUEEZE_PAGE',
+    meta: {
+      type: RouteTypes.Problems,
+      des: '滚动条挤压页面',
+    },
+    component: () => import('@/pages/problem-scroll-squeeze-page/ProblemScrollSqueezePage.vue'),
+  },
+  // Demo
   {
     path: '/demo/anchor',
     name: 'DEMO_ANCHOR',
     meta: {
       type: RouteTypes.Demo,
-      des: '锚点跳转/懒加载',
+      des: '锚点跳转',
     },
     component: () => import('@/pages/demo-anchor/DemoAnchor.vue'),
     children: [
@@ -54,11 +67,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/demo-anchor/components/ScrollInWindow.vue'),
       },
     ],
-  },
-  {
-    path: '/login',
-    name: 'LOGIN',
-    component: () => import('@/pages/login/TheLogin.vue'),
   },
   {
     path: '/admin',
@@ -89,7 +97,12 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-
+  // login
+  {
+    path: '/login',
+    name: 'LOGIN',
+    component: () => import('@/pages/login/TheLogin.vue'),
+  },
   // error page
   {
     path: '/401',

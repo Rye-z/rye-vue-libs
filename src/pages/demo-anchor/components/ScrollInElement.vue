@@ -6,22 +6,23 @@
 
 // 位置保持
 const refContainer = ref(null)
-const refHeader = ref(null)
 
 const router = useRouter()
 const route = useRoute()
 
-const getAnchorKey = (key) => {
+const getScrollKey = (key) => {
   return document.getElementById(key.startsWith('#') ? key.slice(1) : key)
 }
+
 const goRoute = (anchor) => {
   router.push(`${route.path}${anchor}`)
 }
+
 const handleScroll = (el, anchor) => {
-  const to = getAnchorKey(anchor)
+  const to = getScrollKey(anchor)
   if (el) {
     unref(el).scrollTo({
-      top: to.offsetTop - unref(refHeader).offsetHeight,
+      top: to.offsetTop,
       behavior: 'smooth',
     })
   }
@@ -37,6 +38,7 @@ const handleLinkClick = (el, anchor) => {
   handleScroll(el, anchor)
 }
 
+// 页面刷新或首次加载时判断是否跳转至锚点位置
 onMounted(() => {
   const anchorName = route.fullPath.split('#')[1]
   if (!anchorName)
@@ -48,8 +50,8 @@ onMounted(() => {
 
 <template>
   <div class="h-screen overflow-hidden">
-    <div ref="refHeader" class="h-36 border-4 border-amber-100 border-solid sticky top-0" />
-    <div id="container" ref="refContainer" class="grid grid-cols-4 h-screen overflow-y-auto">
+    <div class="h-36 border-4 border-amber-100 border-solid sticky top-0" />
+    <div id="container" ref="refContainer" class="grid grid-cols-4 h-screen overflow-y-auto relative">
       <div
         class="col-span-1 sticky top-0 h-1/5 border-solid border-2 border-cyan-100 flex flex-col"
       >
