@@ -11,7 +11,7 @@ const el = ref(null)
   </el-button>
   <div
     ref="el"
-    class="border border-2 border-blue-300 h-screen w-[300px] "
+    class="border border-2 border-blue-300 h-screen w-[300px] pr-6"
     :class="{ 'overflow-y-scroll': scrollVisible }"
   >
     a long long long long long long long long long long long long long long long long long long sentence

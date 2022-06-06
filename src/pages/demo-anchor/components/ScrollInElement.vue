@@ -10,6 +10,12 @@ const refContainer = ref(null)
 const router = useRouter()
 const route = useRoute()
 
+const isTitleActive = computed(() => {
+  return (anchor) => {
+    return route.fullPath.split('#')[1] === (anchor.startsWith('#') ? anchor.slice(1) : anchor)
+  }
+})
+
 const getScrollKey = (key) => {
   return document.getElementById(key.startsWith('#') ? key.slice(1) : key)
 }
@@ -65,7 +71,7 @@ onMounted(() => {
           ]"
           :key="item.anchor"
           class="hover:cursor-pointer hover:text-blue-700"
-          :class="{ isActive: $route.path.split('#')[1] === item.anchor.slice(1) }"
+          :class="{ 'router-link-active': isTitleActive(item.anchor) }"
           @click="handleLinkClick(refContainer, item.anchor)"
         >
           {{ item.name }}

@@ -66,6 +66,14 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('@/pages/demo-anchor/components/ScrollInWindow.vue'),
       },
+      {
+        path: 'v-anchor',
+        name: 'DEMO_ANCHOR_USE_A_TAG',
+        meta: {
+          type: RouteTypes.Demo,
+        },
+        component: () => import('@/pages/demo-anchor/components/ScrollUseATag.vue'),
+      },
     ],
   },
   {
@@ -96,6 +104,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/demo-system-admin/menu-admin/MenuAdmin.vue'),
       },
     ],
+  },
+  {
+    path: '/demo/lazy-load',
+    name: 'DEMO_LAZY_LOAD',
+    meta: {
+      title: '懒加载',
+      des: '懒加载',
+      type: RouteTypes.Demo,
+    },
+    component: () => import('@/pages/demo-lazyload/DemoLazyLoad.vue'),
   },
   // login
   {

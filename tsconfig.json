@@ -1,21 +1,41 @@
 {
   "compilerOptions": {
-  "baseUrl": "./",
+    "target": "esnext",
+    "module": "esnext",
+    //    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      "webpack-env"
+    ],
     "paths": {
-    "@/*": ["src/*"],
-      "@resource/*": ["src/resource/*"]
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
-  "target": "esnext",
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true
-},
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/**/*.d.js",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
     "auto-imports.d.ts"
   ],
-  "exclude": ["node_modules", ".idea", ".eslintrc.js"]
+  "exclude": [
+    "node_modules"
+  ]
 }
