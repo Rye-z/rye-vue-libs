@@ -16,8 +16,12 @@ const route = useRoute()
         元素滚动
       </el-button>
       <div />
-      <el-button type="primary" @click="$router.push(`/demo/anchor/v-anchor`)">
+      <el-button type="primary" @click="$router.push(`/demo/anchor/a-tag`)">
         a标签锚点
+      </el-button>
+      <div />
+      <el-button type="primary" @click="$router.push(`/demo/anchor/v-anchor`)">
+        VAnchor
       </el-button>
     </div>
     <div class="ml-32">

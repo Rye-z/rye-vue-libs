@@ -67,12 +67,20 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/demo-anchor/components/ScrollInWindow.vue'),
       },
       {
-        path: 'v-anchor',
+        path: 'a-tag',
         name: 'DEMO_ANCHOR_USE_A_TAG',
         meta: {
           type: RouteTypes.Demo,
         },
         component: () => import('@/pages/demo-anchor/components/ScrollUseATag.vue'),
+      },
+      {
+        path: 'v-anchor',
+        name: 'DEMO_ANCHOR_USE_V_ANCHOR',
+        meta: {
+          type: RouteTypes.Demo,
+        },
+        component: () => import('@/pages/demo-anchor/components/ScrollUseVAnchor.vue'),
       },
     ],
   },

@@ -4,10 +4,12 @@ export function isWindow(obj: any) {
   return obj !== null && obj !== undefined && obj === obj.window
 }
 
+// 获取当前【scrollContainer】已经滚动的距离
 export default function getScroll(
   target: HTMLElement | Window | Document | null,
   top: boolean,
 ): number {
+  // 非浏览器环境直接返回0
   if (typeof window === 'undefined')
     return 0
 
@@ -21,6 +23,7 @@ export default function getScroll(
     result = (target as HTMLElement)[method]
 
   if (target && !isWindow(target) && typeof result !== 'number') {
+    //
     result = ((target as HTMLElement).ownerDocument || (target as Document)).documentElement?.[
       method
     ]
