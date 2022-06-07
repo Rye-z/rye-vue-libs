@@ -25,6 +25,13 @@ const handleClick = () => {
   scrollTo(props.href)
 }
 
+watch(props.href, (val, oldVal) => {
+  if (val !== oldVal) {
+    registerLink(props.href)
+    unregisterLink(oldVal)
+  }
+})
+
 onMounted(() => {
   // 注册链接
   registerLink(props.href)

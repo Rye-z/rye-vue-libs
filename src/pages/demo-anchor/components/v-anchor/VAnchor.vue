@@ -155,6 +155,19 @@ onBeforeUnmount(() => {
     state.scrollEvent.remove()
 })
 
+onUpdated(() => {
+  // 如果滚动容器发生了改变??
+  if (state.scrollEvent) {
+    const currentContainer = getContainer()
+    if (state.scrollContainer !== currentContainer) {
+      state.scrollContainer = currentContainer
+      state.scrollEvent.remove()
+      state.scrollEvent = addEventListener(state.scrollContainer, 'scroll', handleScroll)
+      handleScroll()
+    }
+  }
+})
+
 useProvideAnchor(
   {
     registerLink: (link: string) => {
