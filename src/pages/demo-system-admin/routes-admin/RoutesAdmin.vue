@@ -10,7 +10,9 @@ const routes = router.getRoutes()
     class="grid grid-cols-3 border-2 border-solid border-gray-200 rounded-lg p-2 my-2"
   >
     <div>{{ item.name }}</div>
-    <div>{{ item.path }}</div>
+    <router-link :to="item.path">
+      {{ item.path }}
+    </router-link>
     <div>{{ item.components.default }}</div>
   </div>
 </template>

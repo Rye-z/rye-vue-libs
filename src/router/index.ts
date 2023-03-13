@@ -123,6 +123,16 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import('@/pages/demo-lazyload/DemoLazyLoad.vue'),
   },
+  {
+    path: '/demo/g6/fruchterman',
+    name: 'DEMO_LAZY_LOAD',
+    meta: {
+      title: 'fruchterman',
+      des: 'fruchterman',
+      type: RouteTypes.Demo,
+    },
+    component: () => import('@/pages/demo-g6/index.vue'),
+  },
   // login
   {
     path: '/login',
