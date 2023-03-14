@@ -60,7 +60,7 @@ const render = () => {
     width,
     height,
     modes: {
-      default: ['drag-node'],
+      default: ['drag-node', 'activate-relations'],
     },
     animate: true,
     defaultNode: {
