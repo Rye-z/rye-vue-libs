@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useProvideAnchor from './context'
-import addEventListener from '@/components/DOM/addEventListener'
+import addEventListener from '@/components/DOM/addEventListener.js'
 import getScroll from '@/components/_utils/getScroll'
 import scrollTo from '@/components/_utils/scrollTo'
 
@@ -29,7 +29,8 @@ const state = reactive({
 // Element or Window
 let container = null
 
-// 获取元素相对于滚动容器上边距的距离
+// 获取元素相对于滚动容器【可视区域】上边距的距离
+// 不可以直接使用 offsetTop，因为需要配合 offsetParent 进行定位
 function getOffsetTop(el, container) {
   // ??? 判断el占据区域是否有矩形元素
   if (!el.getClientRects().length)
@@ -38,10 +39,11 @@ function getOffsetTop(el, container) {
   const rect = el.getBoundingClientRect()
 
   if (rect.width || rect.height) {
+    // 如果滚动容器是 window，减去边框的宽度
     if (container === window) {
-      // ??? 如果滚动容器是 window，减去边框的宽度
+      // 获取 html 文档对象
       container = el.ownerDocument!.documentElement!
-      // html 的 clientTop 啥时候有值？
+      // html 可以设置 border
       return rect.top - container.clientTop
     }
 
@@ -108,6 +110,7 @@ function handleScrollTo(link) {
   if (!targetElement)
     return
 
+  // 获取锚点元素到【scrollContainer】的上内边距的距离
   const eleOffsetTop = getOffsetTop(targetElement, container)
 
   const y = scrollTop + eleOffsetTop
@@ -118,7 +121,6 @@ function handleScrollTo(link) {
       state.animating = false
     },
     getContainer,
-    duration: 100,
   })
 }
 

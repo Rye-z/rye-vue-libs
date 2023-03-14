@@ -1,18 +1,13 @@
 <script setup>
-// [offsetTop](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetTop)
-// - 它返回当前元素相对于其 offsetParent 元素的顶部内边距的距离。
-// [offsetParent](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/offsetParent)
-// - HTMLElement.offsetParent 是一个只读属性，返回一个指向最近的（指包含层级上的最近）包含该元素的定位元素或者最近的 table,td,th,body元素。
-
 // 位置保持
-import VAnchor from './v-anchor/VAnchor'
-import VAnchorLink from './v-anchor/VAnchorLink'
+import ZAnchor from './z-anchor/ZAnchor.vue'
+import ZAnchorLink from './z-anchor/ZAnchorLink.vue'
 
 const refContainer = ref(null)
 
 const router = useRouter()
-const handleLinkClick = (activeLink) => {
-  console.log(activeLink)
+const handleLinkClick = (link) => {
+  console.log(link)
 }
 </script>
 
@@ -24,11 +19,13 @@ const handleLinkClick = (activeLink) => {
       class="grid grid-cols-4 h-screen overflow-y-auto relative h-[80%]"
     >
       <!-- S Anchor -->
-      <VAnchor
-        :get-container="refContainer"
+      <ZAnchor
+        scroll
+        :get-container="() => refContainer"
+        class="sticky top-0 h-1/5 border-solid border-2 border-cyan-100 flex flex-col"
         @click="handleLinkClick"
       >
-        <VAnchorLink
+        <ZAnchorLink
           v-for="item in [
             { name: 'to title', href: '#title' },
             { name: 'to content1', href: '#content1' },
@@ -40,7 +37,7 @@ const handleLinkClick = (activeLink) => {
           :title="item.name"
           :href="item.href"
         />
-      </VAnchor>
+      </ZAnchor>
       <!-- E Anchor -->
 
       <!-- S Content -->

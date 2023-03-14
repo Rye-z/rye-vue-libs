@@ -40,7 +40,6 @@ const handleScroll = (el, anchor) => {
   }
 }
 const handleLinkClick = (el, anchor) => {
-  goRoute(anchor)
   handleScroll(el, anchor)
 }
 
@@ -72,7 +71,9 @@ onMounted(() => {
           :key="item.anchor"
           class="hover:cursor-pointer hover:text-blue-700"
           :class="{ 'router-link-active': isTitleActive(item.anchor) }"
+          :href="item.anchor"
           @click="handleLinkClick(refContainer, item.anchor)"
+          @change="handleTest"
         >
           {{ item.name }}
         </a>

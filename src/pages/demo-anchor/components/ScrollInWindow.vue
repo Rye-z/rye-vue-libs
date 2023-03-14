@@ -1,53 +1,30 @@
 <script setup>
-const route = useRoute()
-const router = useRouter()
+import ZAnchor from './z-anchor/ZAnchor.vue'
+import ZAnchorLink from './z-anchor/ZAnchorLink.vue'
 
-const getAnchorKey = (key) => {
-  return document.getElementById(key.slice(1))
-}
-
-const goRoute = (anchor) => {
-  router.push(`${route.path}${anchor}`)
-}
-
-const handleLinkClick = (el, anchor) => {
-  goRoute(anchor)
-  const to = getAnchorKey(anchor)
-  if (el) {
-    el.scrollTo({
-      top: to.offsetTop,
-      behavior: 'smooth',
-    })
-  }
-  else {
-    window.scrollTo({
-      top: to.offsetTop,
-      behavior: 'smooth',
-    })
-  }
-}
+const handleClick = () => {}
 </script>
 
 <template>
   <div>
-    <div
+    <ZAnchor
+      scroll
       class="col-span-1 fixed top-0 h-1/5 border-solid border-2 border-cyan-100 rounded-2xl flex flex-col p-2"
+      @click="handleLinkClick"
     >
-      <a
+      <ZAnchorLink
         v-for="item in [
-          { name: 'to title', anchor: '#title' },
-          { name: 'to content1', anchor: '#content1' },
-          { name: 'to content2', anchor: '#content2' },
-          { name: 'to content3', anchor: '#content3' },
-          { name: 'to footer', anchor: '#footer' },
-        ]"
-        :key="item.anchor"
-        class="hover:cursor-pointer hover:text-blue-700"
-        @click="handleLinkClick(null, item.anchor)"
-      >
-        {{ item.name }}
-      </a>
-    </div>
+            { name: 'to title', href: '#title' },
+            { name: 'to content1', href: '#content1' },
+            { name: 'to content2', href: '#content2' },
+            { name: 'to content3', href: '#content3' },
+            { name: 'to footer', href: '#footer' },
+          ]"
+        :key="item.name"
+        :title="item.name"
+        :href="item.href"
+      />
+    </ZAnchor>
 
     <div class="ml-40">
       <div id="title" class="h-screen">

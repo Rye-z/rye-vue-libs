@@ -1,4 +1,5 @@
 <script setup>
+// props
 import { useInjectAnchor } from './context'
 
 const props = defineProps({
@@ -6,56 +7,51 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  // URL 的 #hash 值
   href: {
     type: String,
     default: '',
   },
 })
 
+// use inject
 const {
   registerLink,
   unregisterLink,
+  handleClick: handleContextClick,
   activeLink,
-  handleClick: contextHandleClick,
   scrollTo,
 } = useInjectAnchor()
 
 const handleClick = () => {
-  contextHandleClick()
+  handleContextClick(props.href)
   scrollTo(props.href)
 }
 
-watch(computed(() => props.href), (val, oldVal) => {
-  if (val !== oldVal) {
-    registerLink(props.href)
-    unregisterLink(oldVal)
-  }
-})
-
 onMounted(() => {
-  // 注册链接
   registerLink(props.href)
 })
-
 onBeforeUnmount(() => {
-  // 取消注册链接
   unregisterLink(props.href)
 })
 </script>
 
 <template>
-  <div class="hover:cursor-pointer hover:text-blue-700">
+  <div>
     <a
-      :href="props.href"
-      :class="{ active: activeLink === props.href }"
+      :href="props.href" :class="{ 'active-link': activeLink === props.href }"
       @click="handleClick"
-    >{{ props.title }}
+    >{{ title }}
     </a>
   </div>
 </template>
 
 <style scoped lang="scss">
-.active {
-  color: blue;
+a:hover {
+  color: blue
+}
+
+.active-link {
+  color: red
 }
 </style>

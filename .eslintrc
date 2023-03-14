@@ -17,7 +17,7 @@
         "extensions": [
           ".ts",
           ".tsx",
-          ".vue"
+          ".vue",
         ]
       }
     }

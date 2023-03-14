@@ -14,7 +14,11 @@ interface ScrollToOptions {
 }
 
 export default function scrollTo(y: number, options: ScrollToOptions = {}) {
-  const { getContainer = () => window, callback, duration = 450 } = options
+  const {
+    getContainer = () => window,
+    callback,
+    duration = 450,
+  } = options
   const container = getContainer()
   const scrollTop = getScroll(container, true)
   const startTime = Date.now()
@@ -32,6 +36,7 @@ export default function scrollTo(y: number, options: ScrollToOptions = {}) {
 
     if (time < duration)
       raf(frameFunc)
+
     else if (typeof callback === 'function')
       callback()
   }

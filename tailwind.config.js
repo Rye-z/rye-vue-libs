@@ -8,4 +8,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  purge: [
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
 }

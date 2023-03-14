@@ -49,40 +49,6 @@ const routes: RouteRecordRaw[] = [
       des: '锚点跳转',
     },
     component: () => import('@/pages/demo-anchor/DemoAnchor.vue'),
-    children: [
-      {
-        path: 'element',
-        name: 'DEMO_ANCHOR_ELEMENT',
-        meta: {
-          type: RouteTypes.Demo,
-        },
-        component: () => import('@/pages/demo-anchor/components/ScrollInElement.vue'),
-      },
-      {
-        path: 'window',
-        name: 'DEMO_ANCHOR_WINDOW',
-        meta: {
-          type: RouteTypes.Demo,
-        },
-        component: () => import('@/pages/demo-anchor/components/ScrollInWindow.vue'),
-      },
-      {
-        path: 'a-tag',
-        name: 'DEMO_ANCHOR_USE_A_TAG',
-        meta: {
-          type: RouteTypes.Demo,
-        },
-        component: () => import('@/pages/demo-anchor/components/ScrollUseATag.vue'),
-      },
-      {
-        path: 'v-anchor',
-        name: 'DEMO_ANCHOR_USE_V_ANCHOR',
-        meta: {
-          type: RouteTypes.Demo,
-        },
-        component: () => import('@/pages/demo-anchor/components/ScrollUseVAnchor.vue'),
-      },
-    ],
   },
   {
     path: '/admin',
